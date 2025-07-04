@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# MongoDB connection
+
 client = MongoClient(os.getenv('MONGODB_URI', 'mongodb://localhost:27017'))
 db = client['github_actions']
 collection = db['events']
@@ -52,7 +52,7 @@ def webhook():
             })
 
     elif event_type == 'pull_request' and data['action'] == 'closed' and data['pull_request']['merged']:
-        # treat merged PR as MERGE event
+        
         pr_data = data['pull_request']
         event_data.update({
             'author': pr_data['user']['login'],
